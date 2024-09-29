@@ -1,0 +1,74 @@
+
+# Projekt: Analiza jakości powietrza w miastach
+
+## Cel projektu
+Celem projektu jest analiza jakości powietrza w wybranych miastach na podstawie danych pomiarowych z różnych stacji pomiarowych. Analiza pozwoli na zrozumienie wzorców zanieczyszczeń, a także na identyfikację czynników wpływających na jakość powietrza.
+
+## Kroki realizacji projektu
+
+1. **Zbieranie danych**:
+   - Znajdź dostępny zestaw danych dotyczący jakości powietrza. Możesz skorzystać z danych z [OpenAQ](https://openaq.org/) lub [WHO](https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/air-quality).
+   - Wczytaj dane do R.
+
+2. **Wstępna analiza danych**:
+   - Zbadaj dane pod kątem brakujących wartości, błędów i nieprawidłowości.
+   - Użyj funkcji takich jak `summary()`, `str()`, `head()` do eksploracji danych.
+
+3. **Czyszczenie danych**:
+   - Zidentyfikuj i usuń lub uzupełnij brakujące wartości.
+   - Sprawdź, czy dane mają odpowiednie typy (np. daty, liczby).
+
+4. **Wizualizacja danych**:
+   - Użyj bibliotek takich jak `ggplot2` do stworzenia wizualizacji. Przykładowe wykresy:
+     - Wykresy czasowe zanieczyszczenia w wybranych miastach.
+     - Mapy cieplne zanieczyszczenia powietrza w różnych lokalizacjach.
+
+5. **Analiza statystyczna**:
+   - Przeprowadź analizę korelacji pomiędzy różnymi rodzajami zanieczyszczeń (np. PM2.5, PM10, NO2).
+   - Użyj regresji liniowej lub wielorakiej do zbadania wpływu różnych czynników (np. warunki pogodowe, natężenie ruchu) na jakość powietrza.
+
+6. **Modelowanie predykcyjne**:
+   - Stwórz model predykcyjny jakości powietrza za pomocą regresji lub modeli maszynowego uczenia (np. `randomForest`, `caret`).
+   - Podziel dane na zbiór treningowy i testowy, a następnie oceniaj model.
+
+7. **Prezentacja wyników**:
+   - Przygotuj raport z wynikami analizy. Możesz użyć `R Markdown`, aby stworzyć interaktywny raport z wykresami i podsumowaniami.
+   - Zrób prezentację w PowerPoint lub innym narzędziu wizualizacyjnym.
+
+## Wymagane pakiety
+Zainstaluj i załaduj poniższe pakiety w R:
+```r
+install.packages(c("tidyverse", "lubridate", "ggplot2", "randomForest", "caret", "sf", "leaflet"))
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(randomForest)
+library(caret)
+library(sf)
+library(leaflet)
+```
+
+## Przykładowe kody
+Oto kilka fragmentów kodu, które mogą być pomocne:
+
+### Wczytanie danych
+```r
+data <- read.csv("sciezka/do/pliku.csv")
+```
+
+### Wykres czasowy
+```r
+data$date <- as.Date(data$date)
+ggplot(data, aes(x = date, y = PM2.5)) +
+  geom_line() +
+  labs(title = "PM2.5 w czasie", x = "Data", y = "PM2.5 (µg/m³)")
+```
+
+### Model regresji
+```r
+model <- lm(PM2.5 ~ temperature + humidity + wind_speed, data = data)
+summary(model)
+```
+
+## Podsumowanie
+Ten projekt pozwoli Ci na rozwinięcie umiejętności w R oraz zdobycie doświadczenia w analizie danych i wizualizacji. Możesz dostosować projekt do swoich zainteresowań, zmieniając zakres analizy lub dodając nowe elementy. Jeśli potrzebujesz pomocy w konkretnych częściach projektu, daj mi znać!
